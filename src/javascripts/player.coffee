@@ -7,6 +7,7 @@ Utils = require('./utils.coffee')
 
 class Player
   constructor: (@app, elem) ->
+    console.log("player constructor")
     self = this
     self.media = elem
     self.media.preload = "metadata"
@@ -42,6 +43,7 @@ class Player
 
   loadFile: =>
     @pause()
+    console.log("loadFile")
     files = _.map @app.episode.media, (uri, format) =>
       new AudioFile(format, uri, @media)
 

@@ -42,7 +42,7 @@ class PlaylistItem
       <a class="episode-link" pp-if="url" pp-href="url" target="_blank"><i class="fa fa-link"></i></a>
       <span class="playlist-episode-number" pp-if="number">{ number }.</span>
       <span class="playlist-episode-title" pp-html="title"></span>
-      <span class="playlist-episode-duration">{ humanDuration }</span>
+      <!--<span class="playlist-episode-duration">{ humanDuration }</span>-->
     </li>
     """
 
@@ -61,6 +61,7 @@ class Playlist extends Extension
       @episodes = @app.podcast.episodes
       @renderPanel()
       @renderButton()
+      console.log("load episodes done - playlist.coffee")
 
       @app.theme.addExtension(this)
       $(@app.player.media).on 'loadedmetadata', @setCurrentEpisode
@@ -91,10 +92,7 @@ class Playlist extends Extension
     file.join('.')
 
   click: (event) =>
-    if event.data == @currentEpisode.feedItem
-      @app.player.playPause()
-    else
-      @playItem(event.data)
+    @playItem(event.data)
 
   playItem: (episode) =>
     @updateEpisodeData(episode)

@@ -61,6 +61,8 @@ class Configuration
     @app.podcast = new Podcast(@app, @configuration.podcast || {})
 
     @app.episode = @configuration.episode
+    @app.episodeName = @configuration.episode.title
+    console.log("initial configuration episode set")
     if @app.episode.cover_url?
       console.warn('Please use episode.coverUrl instead of episode.cover_url in player configuration')
       @app.episode.coverUrl ?= @configuration.episode.cover_url
@@ -78,7 +80,7 @@ class Configuration
 
   defaultOptions: {
     currentPlaybackRate: 1
-    playbackRates: [0.5, 1.0, 1.5, 2.0]
+    playbackRates: [0.5, 1.0, 1.25, 1.5, 1.75, 2.0]
     timeMode: 'countup'
     backwardSeconds: 10
     forwardSeconds: 30

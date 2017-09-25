@@ -13,12 +13,13 @@ class Share extends Extension
 
   constructor: (@app) ->
     @episode = @app.episode
+    console.log("share constructor called")
     return unless @episode
 
     return unless @episode.url
 
     @options = _.extend(@defaultOptions, @app.extensionOptions.Share)
-
+    console.log("share constructor - extensionOptions.Share")
     return if @options.disabled
 
     @buildContext()
@@ -55,6 +56,7 @@ class Share extends Extension
     @context.currentTimeInSeconds = @app.player.currentTimeInSeconds
     @context.shareLinks = @shareLinks(@context.currentTimeInSeconds)
     @context.url = @shareUrl()
+    @context.playerUrl = @playerUrl
     @context.showUrlWithTime ?= false
     @context.updateContext = @updateContext
     @context.embedCode = @app.episode.embedCode
@@ -70,6 +72,14 @@ class Share extends Extension
       parsed.fragment("t=#{time}")
     else
       @episode.url
+  
+  playerUrl: =>
+    playerUrl = window.top.location.toString()
+    title = encodeURI(@episode.title)
+    titleIndex = playerUrl.indexOf("&title=")
+    if titleIndex > 0
+      playerUrl = playerUrl.substring(0,titleIndex)
+    playerUrl = playerUrl + "&title=#{title}"
 
   renderPanel: =>
     @panel = $(@panelHtml)
@@ -110,15 +120,19 @@ class Share extends Extension
         <p>
           <input class="share-copy-url" pp-value="url">
         </p>
+        <h3>Copy player link</h3>
+        <p>
+          <input class="share-copy-url" pp-value="playerUrl">
+        </p>
       </div>
       <div class="share-deeplink">
-        <input type="checkbox" pp-checked="showUrlWithTime" pp-on-change="updateContext">
+        <!--<input type="checkbox" pp-checked="showUrlWithTime" pp-on-change="updateContext">
         Start at
-        <input type="text" pp-value="currentTime" disabled="disabled">
+        <input type="text" pp-value="currentTime" disabled="disabled">-->
       </div>
       <div class="share-embed" pp-show="showEmbedUrl">
-        <h3>Embed player</h3>
-        <input class="share-embed-code" pp-value="embedCode"/>
+        <!--<h3>Embed player</h3>
+        <input class="share-embed-code" pp-value="embedCode"/>-->
       </div>
     </div>
     """

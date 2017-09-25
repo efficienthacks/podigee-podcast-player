@@ -5,6 +5,7 @@ Feed = require('./feed.coffee')
 
 class Podcast
   constructor: (@app, @attributes) ->
+    console.log("podcast constructor called")
     @title = @attributes.title
     @feed = if @attributes.feed?
       new Feed(@app, @attributes.feed)

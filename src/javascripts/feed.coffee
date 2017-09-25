@@ -13,9 +13,9 @@ class FeedItem
     href: @_extract('link').html()
     media: @_mapEnclosure()
     description: @_cleanDescription(@_extract('description').html())
-    duration: parseInt(@_extract('duration').text(), 10)
+    duration: parseInt(@_extract('itunes:duration').text(), 10)
     coverUrl: @_extract('image').attr('href') || @podcastCoverUrl
-
+    url: @_extract('link').html()
     number: null
     chaptermarks: null
     embedCode: null

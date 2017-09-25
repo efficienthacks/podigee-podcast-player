@@ -34,6 +34,15 @@ class PodigeePodcastPlayer
       @externalData = new ExternalData(this)
       @renderTheme().done =>
         @initPlayer()
+        @podcast.getEpisodes().done =>
+          console.log("Finding episode to set to")
+          if @episodeName?
+            console.log("looking for the right episode")
+            find = (i for i in @podcast.episodes when i.title.indexOf(@episodeName)>=0)[0]
+            if find?
+              @episode = find
+              @player.loadFile()
+              @theme.updateView()
 
   extensions: {}
 
@@ -148,10 +157,12 @@ class PodigeePodcastPlayer
     @extensions = {}
     @theme.removeButtons()
     @theme.removePanels()
-    PodigeePodcastPlayer.defaultExtensions.forEach (extension) =>
-      self.extensions[extension.extension.name] = new extension(self)
-      if currentlyActiveExtension instanceof extension
-        self.theme.togglePanel(self.extensions[extension.extension.name].panel)
+    PodigeePodcastPlayer.defaultExtensions.forEach (defExt) =>
+      self.extensions[defExt.extension.name] = new defExt(self)
+      if currentlyActiveExtension instanceof defExt
+        console.log("init extensions - name=" + defExt.extension.name + "/ is this defined?"+self.extensions[defExt.extension.name])
+        if self.extensions[defExt.extension.name].panel?
+          self.theme.togglePanel(self.extensions[defExt.extension.name].panel)
 
 
   bindWindowResizing: =>
