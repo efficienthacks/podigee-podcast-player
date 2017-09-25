@@ -5,6 +5,8 @@ Added ability to play an item in the playlist - just specify the title name in t
 Fixed the share panel - prior to this it wasn't showing up after clicking on a playlist item
 Removed the duration - not sure why the numbers are showing as NaN
 
+Download build.zip to get the Javascript - I recommend modifying the stuff in the src folder and compiling with gulp if you need to customize this.
+
 # Podigee Podcast Player
 
 The Podigee Podcast Player is a state of the art web audio player specially crafted for listening to podcasts.
