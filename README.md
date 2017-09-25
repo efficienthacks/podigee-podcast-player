@@ -1,3 +1,10 @@
+# Changes in this fork
+[glitch007's demo] (https://orator.azurewebsites.net/Articles/PlaylistPlayer?url=ce05e4720ecb27f203e403e538c549664e637950_default "My demo (with working playlist)")
+
+Added ability to play an item in the playlist - just specify the title name in the config file
+Fixed the share panel - prior to this it wasn't showing up after clicking on a playlist item
+Removed the duration - not sure why the numbers are showing as NaN
+
 # Podigee Podcast Player
 
 The Podigee Podcast Player is a state of the art web audio player specially crafted for listening to podcasts.
